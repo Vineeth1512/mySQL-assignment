@@ -1,6 +1,6 @@
 use student;
 #Create two tables: EmployeeDetails and EmployeeSalary.
-#Columns for EmployeeDetails: EmpId FullName ManagerId DateOfJoining City
+#1 Columns for EmployeeDetails: EmpId FullName ManagerId DateOfJoining City
 
 create table EmployeeDetails(
 EmpId int primary key,
@@ -10,67 +10,63 @@ City varchar(255),
 ManagerId int
 );
 
-# Columns for EmployeeSalary: : EmpId Project Salary Variable.
+#2 Columns for EmployeeSalary: : EmpId Project Salary Variable.
 
 create table EmployeeSalary(
 EmpId int primary key ,
 Project varchar(255),
 Salary double);
 
-#SQL Query to fetch records that are present in one table but not in another table.
+#3 SQL Query to fetch records that are present in one table but not in another table.
 
 SELECT * FROM EmployeeDetails
 WHERE EmpId NOT IN (SELECT EmpId FROM EmployeeSalary);
 
-#SQL query to fetch all the employees who are not working on any project.
+#4 SQL query to fetch all the employees who are not working on any project.
 
 SELECT * FROM EmployeeDetails
 WHERE EmpId NOT IN (SELECT EmpId FROM EmployeeSalary WHERE Project IS NOT NULL);
 
-#SQL query to fetch all the Employees from EmployeeDetails who joined in the Year 2020
+#5 SQL query to fetch all the Employees from EmployeeDetails who joined in the Year 2020
 
 SELECT * FROM EmployeeDetails
 WHERE YEAR(DateOfJoining) = 2020;
 
-#Fetch all employees from EmployeeDetails who have a salary record in EmployeeSalary.
+#6 Fetch all employees from EmployeeDetails who have a salary record in EmployeeSalary.
 
 SELECT * FROM EmployeeDetails
 WHERE EmpId IN (SELECT EmpId FROM EmployeeSalary);
 
-#Write an SQL query to fetch a project-wise count of employees.
+#7 Write an SQL query to fetch a project-wise count of employees.
 SELECT Project, COUNT(EmpId) AS EmployeeCount
 FROM EmployeeSalary
 GROUP BY Project;
 
 
 
-#Fetch employee names and salaries even if the salary value is not present for the employee.
+#8 Fetch employee names and salaries even if the salary value is not present for the employee.
 
 SELECT ed.EmpId, ed.FullName, COALESCE(es.Salary, 'No Salary') AS Salary
 FROM EmployeeDetails ed
 LEFT JOIN EmployeeSalary es ON ed.EmpId = es.EmpId;
 
-#Write an SQL query to fetch all the Employees who are also managers.
-SELECT Project, COUNT(EmpId) AS EmployeeCount
-FROM EmployeeSalary
-GROUP BY Project;
-
+#9 Write an SQL query to fetch all the Employees who are also managers.
 
 SELECT * FROM EmployeeDetails
 WHERE EmpId IN (SELECT DISTINCT ManagerId FROM EmployeeDetails WHERE ManagerId IS NOT NULL);
 
-#Write an SQL query to fetch duplicate records from EmployeeDetails.
+#10 Write an SQL query to fetch duplicate records from EmployeeDetails.
 SELECT EmpId, COUNT(*)
 FROM EmployeeDetails
 GROUP BY EmpId
 HAVING COUNT(*) > 1;
 
-#Write an SQL query to fetch only odd rows from the table.
+#11 Write an SQL query to fetch only odd rows from the table.
 
 SELECT * FROM EmployeeDetails
 WHERE EmpId % 2 <> 0;
 
-#Write a query to find the 3rd highest salary from a table without top or limit keyword.
+#12 Write a query to find the 3rd highest salary from a table without top or limit keyword.
 
 SELECT DISTINCT Salary
 FROM EmployeeSalary e1
