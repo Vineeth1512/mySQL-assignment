@@ -38,6 +38,10 @@ SELECT * FROM EmployeeDetails
 WHERE EmpId IN (SELECT EmpId FROM EmployeeSalary);
 
 #Write an SQL query to fetch a project-wise count of employees.
+SELECT Project, COUNT(EmpId) AS EmployeeCount
+FROM EmployeeSalary
+GROUP BY Project;
+
 
 
 #Fetch employee names and salaries even if the salary value is not present for the employee.
@@ -47,6 +51,10 @@ FROM EmployeeDetails ed
 LEFT JOIN EmployeeSalary es ON ed.EmpId = es.EmpId;
 
 #Write an SQL query to fetch all the Employees who are also managers.
+SELECT Project, COUNT(EmpId) AS EmployeeCount
+FROM EmployeeSalary
+GROUP BY Project;
+
 
 SELECT * FROM EmployeeDetails
 WHERE EmpId IN (SELECT DISTINCT ManagerId FROM EmployeeDetails WHERE ManagerId IS NOT NULL);
